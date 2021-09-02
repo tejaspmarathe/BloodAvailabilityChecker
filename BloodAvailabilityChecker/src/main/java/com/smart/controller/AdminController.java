@@ -1,8 +1,6 @@
 package com.smart.controller;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,130 +37,187 @@ public class AdminController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	//method for adding common data to response
+	// method for adding common data to response
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
-		String username=principal.getName();
-		System.out.println("Username :: "+username);
+		String username = principal.getName();
+		System.out.println("Username :: " + username);
 
-		User user=userRepository.getUserByUserName(username);
-		System.out.println("User :: "+user);
+		User user = userRepository.getUserByUserName(username);
+		System.out.println("User :: " + user);
 
 		model.addAttribute(user);
 
 		System.out.println("Username: 'User' is default in spring boot..");
 	}
 
+	// direct to admin indexx
 	@RequestMapping("/index")
 	public String dashboard(Model model, Principal principal) {
-		String name=principal.getName();
-		User user=userRepository.getUserByUserName(name);
-		System.out.println("Role:: "+user.getRole());
-		//model.addAttribute("user",user);
-		model.addAttribute("title","Admin Dashboard");
+		String name = principal.getName();
+		User user = userRepository.getUserByUserName(name);
+		System.out.println("Role:: " + user.getRole());
+		// model.addAttribute("user",user);
+		model.addAttribute("title", "Admin Dashboard");
 		return "admin/dashboard";
 	}
 
+	// show all bloodbank to admin
 	@GetMapping("/show_bloodbank/{page}")
-	public String viewBloodBankPage(@PathVariable ("page") Integer page, Model model, Principal principal) {
-		model.addAttribute("title","View Users");
-		Pageable pageable=PageRequest .of(page, 3);;
+	public String viewBloodBankPage(@PathVariable("page") Integer page, Model model, Principal principal) {
+		model.addAttribute("title", "View Users");
+		Pageable pageable = PageRequest.of(page, 3);
+		;
 
-		String role="ROLE_BLOODBANK";
-		Page<User> bloodbank=this.userRepository.findUserByRole(role,pageable);
+		String role = "ROLE_BLOODBANK";
+		Page<User> bloodbank = this.userRepository.findUserByRole(role, pageable);
 
-		model.addAttribute("bloodbank",bloodbank);
-		model.addAttribute("currentPage",page);
-		model.addAttribute("totalPages",bloodbank.getTotalPages());
+		model.addAttribute("bloodbank", bloodbank);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", bloodbank.getTotalPages());
 		return "admin/show_bloodbank";
 	}
 
+	// show all bloodrequestork to admin
 	@GetMapping("/show_bloodrequestor/{page}")
-	public String viewBloodRequestorPage(@PathVariable ("page") Integer page, Model model, Principal principal) {
-		model.addAttribute("title","View Blood Requestor");
-		Pageable pageable=PageRequest .of(page, 3);;
+	public String viewBloodRequestorPage(@PathVariable("page") Integer page, Model model, Principal principal) {
+		model.addAttribute("title", "View Blood Requestor");
+		Pageable pageable = PageRequest.of(page, 3);
+		;
 
-		String role="ROLE_USER";
-		Page<User> users=this.userRepository.findUserByRole(role,pageable);
+		String role = "ROLE_USER";
+		Page<User> users = this.userRepository.findUserByRole(role, pageable);
 
-		model.addAttribute("users",users);
-		model.addAttribute("currentPage",page);
-		model.addAttribute("totalPages",users.getTotalPages());
+		model.addAttribute("users", users);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", users.getTotalPages());
 		return "admin/show_bloodrequestor";
 	}
 
+	// update bloodbank status to active
 	@PostMapping("/update-status-approve/{uid}")
-	public String updateStatusApprove(@PathVariable ("uid") Integer uid, Model model, Principal principal, HttpSession session) {
+	public String updateStatusApprove(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
 
 		System.out.println("Inside updateStatus()");
-		User user=this.userRepository.findById(uid).get();
+		User user = this.userRepository.findById(uid).get();
 		user.setStatus("Active");
 		this.userRepository.save(user);
-		System.out.println("User status updated"+ user.getStatus());
+		System.out.println("User status updated" + user.getStatus());
+		session.setAttribute("message", new Message(user.getName() + " Activated successfully..!", "success"));
 		return "redirect:/admin/show_bloodbank/0";
 	}
 
+	// update bloodbank status to block
 	@PostMapping("update-status-block/{uid}")
-	public String updateStatusReject(@PathVariable ("uid") Integer uid, Model model, Principal principal, HttpSession session) {
+	public String updateStatusReject(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
 
 		System.out.println("Inside updateStatus()");
-		User user=this.userRepository.findById(uid).get();
+		User user = this.userRepository.findById(uid).get();
 		user.setStatus("Blocked");
 		this.userRepository.save(user);
-		System.out.println("User status updated"+ user.getStatus());
+		System.out.println("User status updated" + user.getStatus());
+		session.setAttribute("message", new Message(user.getName() + " Updated successfully..!", "success"));
 		return "redirect:/admin/show_bloodbank/0";
 	}
 
+	// delete bloodbank
 	@GetMapping("/delete-bloodbank/{uid}")
-	public String deleteContact(@PathVariable ("uid") Integer uid, Model model, Principal principal, HttpSession session) {
-		
-		String name=principal.getName();
-		User user=userRepository.getUserByUserName(name);
+	public String deleteBloodBank(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
+
+		User user1 = this.userRepository.findById(uid).get();
+
+//		String name=principal.getName();
+//		User user=userRepository.getUserByUserName(name);
 		BloodStock bloodStockDetails = this.bLoodStockRepository.findBloodStockByUser(uid);
-		if(bloodStockDetails!=null) {
+		if (bloodStockDetails != null) {
 			this.bLoodStockRepository.deleteById(bloodStockDetails.getBloodstockid());
 		}
 
 		this.userRepository.deleteById(uid);
-		
+
 		System.out.println("Deleted..");
-		session.setAttribute("message", new Message("Bloodbank deleted successfully..!","success"));
+		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "success"));
 		return "redirect:/admin/show_bloodbank/0";
 	}
 
-	//Your profile handler
+	// update blood requester status to active
+	@PostMapping("/update-status-bloodrequestor-active/{uid}")
+	public String updateBloodRequestorStatusActive(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
+
+		System.out.println("Inside updateStatus()");
+		User user = this.userRepository.findById(uid).get();
+		user.setStatus("Active");
+		this.userRepository.save(user);
+		System.out.println("User status updated" + user.getStatus());
+		session.setAttribute("message", new Message(user.getName() + " Activated successfully..!", "success"));
+		return "redirect:/admin/show_bloodrequestor/0";
+	}
+
+	// update blood requester status to block
+	@PostMapping("/update-status-bloodrequestor-block/{uid}")
+	public String updateBloodRequestorStatusBlock(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
+
+		System.out.println("Inside updateStatus()");
+		User user = this.userRepository.findById(uid).get();
+		user.setStatus("Blocked");
+		this.userRepository.save(user);
+		System.out.println("User status updated" + user.getStatus());
+		session.setAttribute("message", new Message(user.getName() + " Blocked successfully..!", "success"));
+		return "redirect:/admin/show_bloodrequestor/0";
+	}
+
+	// delete blood requester
+	@GetMapping("/delete-bloodrequestor/{uid}")
+	public String deleteBloodRequestor(@PathVariable("uid") Integer uid, Model model, Principal principal,
+			HttpSession session) {
+		User user1 = this.userRepository.findById(uid).get();
+
+		this.userRepository.deleteById(uid);
+
+		System.out.println("Deleted..");
+		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "success"));
+		return "redirect:/admin/show_bloodrequestor/0";
+	}
+
+	// admin profile handler
 	@GetMapping("/profile")
 	public String yourProfile(Model model) {
 
-		model.addAttribute("title","Profile Page");
+		model.addAttribute("title", "Profile Page");
 		return "admin/profile";
 	}
 
-	//Open Setting Handler
+	// Open Setting Handler
 	@GetMapping("/settings")
 	public String openSettings() {
 		return "admin/settings";
 	}
-	//change password handler
+
+	// change password handler
 	@PostMapping("/change-password")
-	public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, Model model, Principal principal,HttpSession session) {
+	public String changePassword(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("newPassword") String newPassword, Model model, Principal principal, HttpSession session) {
 
-		System.out.println("oldPassword ::"+oldPassword+" , newPassword ::"+newPassword);
+		System.out.println("oldPassword ::" + oldPassword + " , newPassword ::" + newPassword);
 
-		String name=principal.getName();
-		User user=userRepository.getUserByUserName(name);
-		String currentPassword=user.getPassword();
-		System.out.println("currentPassword :: "+currentPassword);
+		String name = principal.getName();
+		User user = userRepository.getUserByUserName(name);
+		String currentPassword = user.getPassword();
+		System.out.println("currentPassword :: " + currentPassword);
 
-		if(this.passwordEncoder.matches(oldPassword, currentPassword)){
-			//change password
+		if (this.passwordEncoder.matches(oldPassword, currentPassword)) {
+			// change password
 			user.setPassword(this.passwordEncoder.encode(newPassword));
 			this.userRepository.save(user);
-			session.setAttribute("message",new Message("Your password is successfully changed..","success"));
-		}
-		else {
-			//return with error message
-			session.setAttribute("message",new Message("Please enter correct old password!!","danger"));
+			session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
+		} else {
+			// return with error message
+			session.setAttribute("message", new Message("Please enter correct old password!!", "danger"));
 			return "redirect:/admin/settings";
 		}
 

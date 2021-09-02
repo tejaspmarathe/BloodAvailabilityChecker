@@ -35,17 +35,29 @@ public class LoginController {
 			
 			if(user.getStatus().equalsIgnoreCase("Active")) {
 				System.out.println("Role ::"+user.getRole());
-				model.addAttribute("title","User Dashboard");
+				model.addAttribute("title","BloodBank Dashboard");
 				model.addAttribute("user",user);
 				return "bloodbank/user_dashboard";
 			}else {
-				return "redirect:/signin?status=Account status is "+user.getStatus()+". Please Contact System Admin..!";
+				return "redirect:/signin?status="+user.getName()+", Your account status is "+user.getStatus()+". Please Contact System Admin..!";
 			}
 		}else {
-			System.out.println("Role ::"+user.getRole());
-			model.addAttribute("title","User Dashboard");
-			model.addAttribute("user",user);
-			return "bloodrequestor/dashboard";
+//			System.out.println("Role ::"+user.getRole());
+//			model.addAttribute("title","User Dashboard");
+//			model.addAttribute("user",user);
+//			return "bloodrequestor/dashboard";
+			
+			if(user.getStatus().equalsIgnoreCase("Active")) {
+				System.out.println("Role ::"+user.getRole());
+				model.addAttribute("title","BloodRequestor Dashboard");
+				model.addAttribute("user",user);
+				return "bloodrequestor/dashboard";
+			}else {
+				return "redirect:/signin?status="+user.getName()+", Your account status is "+user.getStatus()+". Please Contact System Admin..!";
+			}
+			
+			
+			
 		}
 		
 	}

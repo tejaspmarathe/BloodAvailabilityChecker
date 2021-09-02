@@ -47,10 +47,10 @@ public class AuthenticationController {
 			System.out.println("OTP ::"+otp);
 
 			//2. send otp to user
-			String subject="OTP from SCM";
+			String subject="OTP from Blood Availability Checker Application";
 			String message="<div style='border:1px solid #e2e2e2; padding:20px'>"
 							+"<h3>"
-							+"Please use below OTP for BAC verification. OTP is "
+							+"Please use below OTP for Blood Availability Checker Application verification. OTP is "
 							+"<br>"
 							+"<b>"
 							+otp
