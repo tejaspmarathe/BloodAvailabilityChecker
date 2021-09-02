@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="bloodbank/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Show Blood Stock</title>
+</head>
+<body>
+
+	<section>
+		<div class="card mr-3 ml-3" th:if=${bloodStockDetails}>
+			<div class="card-body">
+				<div class="container text-center">
+
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col"><span th:text="${bloodStockDetails.bloodstockid}"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">A+</th>
+								<td><span th:text="${bloodStockDetails.apos}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">A-</th>
+								<td><span th:text="${bloodStockDetails.aneg}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">B+</th>
+								<td><span th:text="${bloodStockDetails.bpos}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">B-</th>
+								<td><span th:text="${bloodStockDetails.bneg}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">AB+</th>
+								<td><span th:text="${bloodStockDetails.abpos}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">AB-</th>
+								<td><span th:text="${bloodStockDetails.abneg}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">O+</th>
+								<td><span th:text="${bloodStockDetails.opos}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">O-</th>
+								<td><span th:text="${bloodStockDetails.oneg}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="container "></div>
+					<button th:onclick="|deletebloodstock(${bloodStockDetails.bloodstockid})|"
+						class="btn btn-danger btn-sm btn-block">Delete</button>
+					<!-- <a href="#" th:onclick="|deleteContact(${contact.cid})|" class="btn btn-danger btn-sm">Delete</a> -->
+
+					<form method="post"
+						th:action="@{'/user/update-bloodstock/'+${bloodStockDetails.bloodstockid}}" class="mt-2">
+						<button type="submit" class="btn btn-block btn-primary btn-sm">Update</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- <h1 class="text-center p-3 bg-danger text-white" th:unless=${bloodStockDetails}>You
+			don't have permission to view this contact..</h1> -->
+	</section>
+
+</body>
+</html>

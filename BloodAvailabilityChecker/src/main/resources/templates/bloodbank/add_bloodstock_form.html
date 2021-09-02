@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="bloodbank/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Contact</title>
+</head>
+<body>
+
+	<section>
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+				<h1 class="text-center">Add BloodStock</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-6 offset-md-3">
+							<form action="#" th:object="${bloodstock}" enctype="multipart/form-data" method="post" 
+									th:action="@{/user/process-bloodstock}" class="mt-2">
+								
+								<!-- First Name -->
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												A+
+											</div> 
+										</div>
+										<input required type="text" id="apos" name="apos" placeholder="Enter Quntity of Bags of A+ " class="form-control"/>
+									</div>
+									
+								<!-- Second Name -->
+									<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												A-
+											</div> 
+										</div>
+										<input required type="text" id="aneg" name="aneg" placeholder="Enter Quntity of Bags of A-" class="form-control"/>
+									</div>
+								
+								<!-- Phone Field Name -->
+									<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												B+
+											</div> 
+										</div>
+										<input required type="text" id="bpos" name="bpos" placeholder="Enter Quntity of Bags of B+ " class="form-control"/>
+									</div>
+									
+								<!-- Email Field Name -->
+									<div class="input-group mt-3">
+										<div class="input-group-text">
+												A-
+											</div> 
+										<input required type="text" id="bneg" name="bneg" placeholder="Enter Quntity of Bags of B-" class="form-control"/>
+									</div>	
+									
+								<!-- Work Field Name -->
+									<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												AB+
+											</div> 
+										</div>
+										<input required type="text" id="abpos" name="abpos" placeholder="Enter Quntity of Bags of AB+" class="form-control"/>
+									</div>	
+									
+									
+										<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												AB-
+											</div> 
+										</div>
+										<input required type="text" id="abneg" name="abneg" placeholder="Enter Quntity of Bags of AB-" class="form-control"/>
+									</div>	
+									
+									
+									
+										<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												O+
+											</div> 
+										</div>
+										<input required type="text" id="opos" name="opos" placeholder="Enter Quntity of Bags of O+" class="form-control"/>
+									</div>	
+									
+									
+										<div class="input-group mt-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												O-
+											</div> 
+										</div>
+										<input required type="text" id="oneg" name="oneg" placeholder="Enter Quntity of Bags of O-" class="form-control"/>
+									</div>		
+									
+							
+									
+									
+									
+								<div class="container text-center mt-3">
+									<button class="btn btn-outline-primary">Save</button>
+								</div>		
+							</form>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</section>
+
+</body>
+</html>
