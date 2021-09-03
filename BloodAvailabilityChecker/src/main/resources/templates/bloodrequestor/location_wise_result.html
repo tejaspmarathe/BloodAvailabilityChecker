@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="bloodrequestor/base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="bloodrequestor/base::layout(~{::section})">
 <head>
-    <meta charset="UTF-8">
-    <title>Location wise filtered result</title>
+<meta charset="UTF-8">
+<title>Location wise filtered result</title>
 </head>
 <body>
 
@@ -10,7 +11,7 @@
 		<div class="card mr-3 ml-3">
 			<div class="card-body">
 				<h1 class="text-center">Location wise filtered result</h1>
-				
+
 				<!-- <div class="search-container my-4">
 					
 					<input onkeyup="searchLocation()" id="search-input" type="text" class="form-control" placeholder="Search your location.." /> 
@@ -24,31 +25,46 @@
 				</div> -->
 				<div class="table-responsive">
 					<table class="table table-hover">
-					  <thead class="thead-light">
-					    <tr>
-					      <!-- <th scope="col">#ID</th> -->
-					      <th scope="col">Name</th>
-					      <th scope="col">Email</th>
-					      <th scope="col">Phone</th>
-					      <th scope="col">Address</th>
-					      <th scope="col">Location</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr th:each="u : ${users}">
-					      <!-- <th scope="row" th:text="${u.id}"></th> -->
-					      
-					      <td th:text="${u.name}"></td>
-					      <td th:text="${u.email}"></td>
-					      <td th:text="${u.phone}"></td>
-					      <td th:text="${u.address}"></td>
-					      <td th:text="${u.location}"></td>
+						<thead class="thead-light">
+							<tr>
+								<!-- <th scope="col">#ID</th> -->
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Phone</th>
+								<th scope="col">Address</th>
+								<th scope="col">Location</th>
+								<th scope="col">A+</th>
+								<th scope="col">A-</th>
+								<th scope="col">B+</th>
+								<th scope="col">B-</th>
+								<th scope="col">AB+</th>
+								<th scope="col">AB-</th>
+								<th scope="col">O+</th>
+								<th scope="col">O-</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="u : ${users}">
+								<!-- <th scope="row" th:text="${u.id}"></th> -->
 
-					    </tr>
-					  </tbody>
+								<td th:text="${u.name}"></td>
+								<td th:text="${u.email}"></td>
+								<td th:text="${u.phone}"></td>
+								<td th:text="${u.address}"></td>
+								<td th:text="${u.location}"></td>
+								<td th:text="${u.bloodStock.apos}"></td>
+								<td th:text="${u.bloodStock.aneg}"></td>
+								<td th:text="${u.bloodStock.bpos}"></td>
+								<td th:text="${u.bloodStock.bneg}"></td>
+								<td th:text="${u.bloodStock.abpos}"></td>
+								<td th:text="${u.bloodStock.abneg}"></td>
+								<td th:text="${u.bloodStock.opos}"></td>
+								<td th:text="${u.bloodStock.oneg}"></td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
-			
+
 				<!-- Pagination -->
 				<!-- <nav aria-label="Page navigation example">
 				  <ul class="pagination">
@@ -60,7 +76,7 @@
 				  </ul>
 				</nav> -->
 				<!-- Pagination End-->
-				
+
 			</div>
 		</div>
 		<script>
@@ -71,6 +87,6 @@
 			
 		</script>
 	</section>
-	
+
 </body>
 </html>

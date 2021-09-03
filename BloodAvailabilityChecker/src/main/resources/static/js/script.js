@@ -43,7 +43,9 @@ const searchLocation=()=>{
 						text+=`<a href='/user/${contact.cid}/contact' class='list-group-item list-group-item-action'> ${contact.name} </a>`;
 						
 					});*/
-					
+					if(data.length == 0){
+						text+='Bloodbank not found for this location..';
+					}
 					data.forEach(user => {
 						text+=`<a href='/bloodrequestor/location_wise_result/${user.location}/0' class='list-group-item list-group-item-action'> ${user.location} </a>`;
 						

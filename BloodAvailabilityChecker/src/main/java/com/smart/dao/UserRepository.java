@@ -29,5 +29,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	//search
 	public List<User> findDistinctByLocationContainingAndRole(String location, String role);
+
+	@Query("select u from User u where u.role=:role")
+	public List<User> findbyRole(String role);
 	
 }

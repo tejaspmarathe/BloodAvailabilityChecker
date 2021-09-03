@@ -1,12 +1,14 @@
 package com.smart.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smart.dao.BLoodStockRepository;
 import com.smart.dao.UserRepository;
+import com.smart.entities.BloodStock;
 import com.smart.entities.User;
 import com.smart.helper.Message;
 
@@ -73,8 +76,16 @@ public class BloodRequestorController {
 		
 
 		String role = "ROLE_BLOODBANK";
-		Page<User> users = this.userRepository.findUserByRole(role, pageable);
+		//Page<User> users = this.userRepository.findUserByRole(role, pageable);
 
+		List<User> findUsers=this.userRepository.findbyRole(role);
+		List<User> listUsers=new ArrayList<User>();
+		for (User user : findUsers) {
+			if(user.getBloodStock()!=null) {
+				listUsers.add(user);
+			}
+		}
+		Page<User> users = new PageImpl<User>(listUsers, pageable, listUsers.size());
 		model.addAttribute("users", users);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", users.getTotalPages());
@@ -95,8 +106,13 @@ public class BloodRequestorController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", users.getTotalPages());*/
 		
-		List<User> users = this.userRepository.getUserByLocation(location);
-
+		List<User> findUsers = this.userRepository.getUserByLocation(location);
+		List<User> users=new ArrayList<User>();
+		for (User user : findUsers) {
+			if(user.getBloodStock()!=null) {
+				users.add(user);
+			}
+		}
 		model.addAttribute("users", users);
 		return "bloodrequestor/location_wise_result";
 	}
