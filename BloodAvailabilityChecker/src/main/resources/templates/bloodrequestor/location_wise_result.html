@@ -2,26 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="bloodrequestor/base::layout(~{::section})">
 <head>
     <meta charset="UTF-8">
-    <title>Check Blood Availability View</title>
+    <title>Location wise filtered result</title>
 </head>
 <body>
 
 	<section>
 		<div class="card mr-3 ml-3">
 			<div class="card-body">
-				<h1 class="text-center">Check Blood Availability</h1>
+				<h1 class="text-center">Location wise filtered result</h1>
 				
-				<div class="search-container my-4">
+				<!-- <div class="search-container my-4">
 					
 					<input onkeyup="searchLocation()" id="search-input" type="text" class="form-control" placeholder="Search your location.." /> 
 				
 					<div class="search-result">
 						
-						<!-- result goes here -->
+						result goes here
 						<h2>This is result..</h2>
 						
 					</div>
-				</div>
+				</div> -->
 				<div class="table-responsive">
 					<table class="table table-hover">
 					  <thead class="thead-light">
@@ -50,15 +50,15 @@
 				</div>
 			
 				<!-- Pagination -->
-				<nav aria-label="Page navigation example">
+				<!-- <nav aria-label="Page navigation example">
 				  <ul class="pagination">
-				    <li th:if="${currentPage != 0}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+				    <li th:if="${currentPage != 0}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${currentPage-1}+'/'+${u.location}}" class="page-link" href="#">Previous</a></li>
 				    
-				    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+				    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${i-1}+'/'+${u.location}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
 				    
-				    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${currentPage+1}}" class="page-link" href="#">Next</a></li>
+				    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/bloodrequestor/check_blood_availability/'+${currentPage+1}+'/'+${u.location}}" class="page-link" href="#">Next</a></li>
 				  </ul>
-				</nav>
+				</nav> -->
 				<!-- Pagination End-->
 				
 			</div>

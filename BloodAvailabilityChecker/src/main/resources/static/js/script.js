@@ -17,7 +17,7 @@ const toggleSidebar = () => {
 
 };
 
-const search=()=>{
+const searchLocation=()=>{
 
 	//console.log("searching..");
 	let query= $("#search-input").val();
@@ -29,7 +29,7 @@ const search=()=>{
 		//console.log(query);
 
 		//Sending request to server
-		let url=`http://localhost:8282/search/${query}`;
+		let url=`http://localhost:8080/search/${query}`;
 
 		fetch(url)
 			.then((response) => {
@@ -39,8 +39,14 @@ const search=()=>{
 				 //console.log(data);
 
 				 let text=`<div class='list-group'>`;
-					data.forEach(contact => {
+					/*data.forEach(contact => {
 						text+=`<a href='/user/${contact.cid}/contact' class='list-group-item list-group-item-action'> ${contact.name} </a>`;
+						
+					});*/
+					
+					data.forEach(user => {
+						text+=`<a href='/bloodrequestor/location_wise_result/${user.location}/0' class='list-group-item list-group-item-action'> ${user.location} </a>`;
+						
 					});
 
 				 text+=`</div>`;

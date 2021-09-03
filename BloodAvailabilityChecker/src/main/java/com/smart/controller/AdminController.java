@@ -83,7 +83,6 @@ public class AdminController {
 	public String viewBloodRequestorPage(@PathVariable("page") Integer page, Model model, Principal principal) {
 		model.addAttribute("title", "View Blood Requestor");
 		Pageable pageable = PageRequest.of(page, 3);
-		;
 
 		String role = "ROLE_USER";
 		Page<User> users = this.userRepository.findUserByRole(role, pageable);
