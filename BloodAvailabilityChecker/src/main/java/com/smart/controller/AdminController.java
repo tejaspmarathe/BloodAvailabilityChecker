@@ -128,8 +128,8 @@ public class AdminController {
 
 		User user1 = this.userRepository.findById(uid).get();
 
-//		String name=principal.getName();
-//		User user=userRepository.getUserByUserName(name);
+		//		String name=principal.getName();
+		//		User user=userRepository.getUserByUserName(name);
 		BloodStock bloodStockDetails = this.bLoodStockRepository.findBloodStockByUser(uid);
 		if (bloodStockDetails != null) {
 			this.bLoodStockRepository.deleteById(bloodStockDetails.getBloodstockid());
@@ -209,11 +209,16 @@ public class AdminController {
 		String currentPassword = user.getPassword();
 		System.out.println("currentPassword :: " + currentPassword);
 
-		if (this.passwordEncoder.matches(oldPassword, currentPassword)) {
-			// change password
-			user.setPassword(this.passwordEncoder.encode(newPassword));
-			this.userRepository.save(user);
-			session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
+		if (this.passwordEncoder.matches(oldPassword, currentPassword) ) {
+			if(newPassword!=null && newPassword!="") {
+				// change password
+				user.setPassword(this.passwordEncoder.encode(newPassword));
+				this.userRepository.save(user);
+				session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
+			}else {
+				session.setAttribute("message", new Message("New password field should not be blank!!", "danger"));
+				return "redirect:/admin/settings";
+			}
 		} else {
 			// return with error message
 			session.setAttribute("message", new Message("Please enter correct old password!!", "danger"));

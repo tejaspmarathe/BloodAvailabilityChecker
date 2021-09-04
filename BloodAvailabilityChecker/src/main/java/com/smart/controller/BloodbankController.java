@@ -27,7 +27,7 @@ import com.smart.helper.Message;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class BloodbankController {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -220,10 +220,15 @@ public class UserController {
 		System.out.println("currentPassword :: "+currentPassword);
 
 		if(this.passwordEncoder.matches(oldPassword, currentPassword)){
+			if(newPassword!=null && newPassword!="") {
 			//change password
 			user.setPassword(this.passwordEncoder.encode(newPassword));
 			this.userRepository.save(user);
 			session.setAttribute("message",new Message("Your password is successfully changed..","success"));
+			}else {
+				session.setAttribute("message", new Message("New password field should not be blank!!", "danger"));
+				return "redirect:/user/settings";
+			}
 		}
 		else {
 			//return with error message

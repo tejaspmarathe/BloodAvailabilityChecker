@@ -22,10 +22,6 @@ public class SearchController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private BLoodStockRepository bLoodStockRepository;
-
-
 	//Search Handler
 	@GetMapping("/search/{query}")
 	public ResponseEntity<?> search(@PathVariable ("query") String query,Principal principal){

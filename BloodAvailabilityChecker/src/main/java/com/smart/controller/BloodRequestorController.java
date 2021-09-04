@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.smart.dao.BLoodStockRepository;
 import com.smart.dao.UserRepository;
-import com.smart.entities.BloodStock;
 import com.smart.entities.User;
 import com.smart.helper.Message;
 
@@ -33,9 +31,6 @@ public class BloodRequestorController {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	private BLoodStockRepository bLoodStockRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -70,10 +65,10 @@ public class BloodRequestorController {
 
 	@GetMapping("/check_blood_availability/{page}")
 	public String checkBloodAvailability(@PathVariable("page") Integer page, Model model, Principal principal) {
-		
+
 		model.addAttribute("title", "View Bloodbank");
 		Pageable pageable = PageRequest.of(page, 3);
-		
+
 
 		String role = "ROLE_BLOODBANK";
 		//Page<User> users = this.userRepository.findUserByRole(role, pageable);
@@ -89,14 +84,14 @@ public class BloodRequestorController {
 		model.addAttribute("users", users);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", users.getTotalPages());
-		
+
 		return "bloodrequestor/check_blood_availability";	
 	}
 
 	@GetMapping("/location_wise_result/{location}/{page}")
 	public String locationWiseSearch(@PathVariable("page") Integer page, @PathVariable ("location") String location, Model model) {
-		
-		
+
+
 		model.addAttribute("title", "View Bloodbank");
 		/*Pageable pageable = PageRequest.of(page, 3);
 
@@ -105,7 +100,7 @@ public class BloodRequestorController {
 		model.addAttribute("users", users);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", users.getTotalPages());*/
-		
+
 		List<User> findUsers = this.userRepository.getUserByLocation(location);
 		List<User> users=new ArrayList<User>();
 		for (User user : findUsers) {
@@ -144,10 +139,16 @@ public class BloodRequestorController {
 		System.out.println("currentPassword :: " + currentPassword);
 
 		if (this.passwordEncoder.matches(oldPassword, currentPassword)) {
-			// change password
-			user.setPassword(this.passwordEncoder.encode(newPassword));
-			this.userRepository.save(user);
-			session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
+			if(newPassword!=null && newPassword!="") {
+				// change password
+				user.setPassword(this.passwordEncoder.encode(newPassword));
+				this.userRepository.save(user);
+				session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
+			}else {
+				// return with error message
+				session.setAttribute("message", new Message("New password field should not be blank!!!!", "danger"));
+				return "redirect:/bloodrequestor/settings";
+			}
 		} else {
 			// return with error message
 			session.setAttribute("message", new Message("Please enter correct old password!!", "danger"));
