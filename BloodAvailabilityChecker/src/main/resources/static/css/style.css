@@ -9,11 +9,7 @@ body {
 }
 
 .banner {
-	/* width: 100%;
-	height: 93vh;
-	background: linear-gradient(rgba(248, 247, 247, 0.527),rgba(160, 112, 112, 0.719)),url(../img/pic5.jpg);
-	background-size: cover;
-	color: white; */
+
 	width: 100%;
 	height: 100vh;
 	background: linear-gradient(rgba(248, 247, 247, -0.473),
@@ -30,11 +26,12 @@ body {
 }
 
 #login .container #login-row #login-column #login-box {
-	margin-top: 120px;
+	margin-top: 90px;
 	max-width: 600px;
-	height: 400px;
-	border: 1px solid #9C9C9C;
+	height: 420px;
+	border: 1px solid #ff0000;
 	background-color: white;
+	z-index: 50;
 }
 
 #login .container #login-row #login-column #login-box #login-form {
@@ -59,6 +56,10 @@ body {
 	}
 	.content {
 		margin-left: 0% !important;
+	}
+	
+	nav img{
+	 display: none;
 	}
 }
 
@@ -102,12 +103,7 @@ body {
 	cursor: pointer;
 }
 
-/* .my_profile_picture {
-	width: 35px;
-	height: 30px;
-	object-fit: cover;
-	border-radius: 50%;
-} */
+
 
 /* Search CSS */
 .search-container {
@@ -126,4 +122,33 @@ body {
 .active {
 	background: rgb(255, 0, 0) !important;
 	color: white !important;
+}
+
+
+
+/* bootstrap css override */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255);
+}
+
+
+.text-danger {
+    color: #ff0000 !important;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ff0000 !important;
+    border-color: #dc3545;
+}
+
+.bg-danger {
+    background-color: #ff0000!important;
+}
+
+.my-card {
+    padding: 20px;
+    background: #FFFFFF;
+    border: 1px solid #ff0000;
+    z-index: 5;
 }

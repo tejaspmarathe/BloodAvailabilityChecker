@@ -20,6 +20,8 @@
 <body>
 	<!-- Start navbar -->
 	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-danger navcustomcolor">
+	<!-- <img class="" style="width: 80px" th:src="@{/img/add-user.png}"> -->
+	<img th:src="@{/img/symbol1.PNG}"  width="50px"  class="rounded-circle mr-2">
 		
 		<a class="navbar-brand" href="#">Blood Availability Checker</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -36,13 +38,17 @@
 						<!-- <span class="sr-only">(current)</span> -->
 				</a></li>
 			
-				<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/signup/}">Signup</a>
+				</li>
 				
 				<li class="nav-item"><a class="nav-link" th:href="@{/signin/}" href="#">Login</a>
 				</li>
 				
-				<li class="nav-item"><a class="nav-link" th:href="@{/signup/}">Signup</a>
-				</li>
+				<li class="nav-item"><a class="nav-link" href="#">About</a></li>
+				
+				
+				
+				
 			</ul>
 			<!-- <form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search"

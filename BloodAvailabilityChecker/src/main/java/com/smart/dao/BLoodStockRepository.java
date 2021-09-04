@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.smart.entities.BloodStock;
-import com.smart.entities.User;
 
 public interface BLoodStockRepository  extends JpaRepository<BloodStock, Integer>{
 

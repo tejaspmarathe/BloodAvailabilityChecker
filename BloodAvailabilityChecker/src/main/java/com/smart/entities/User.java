@@ -1,19 +1,13 @@
 package com.smart.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -28,7 +22,7 @@ public class User {
 	private int id;
 	
 	@NotBlank(message = "Name should not be blank")
-	@Size(min = 2,max = 20,message = "min 2 and max 20 characters are allowed")
+	@Size(min = 2,max = 50,message = "min 2 and max 50 characters are allowed")
 	private String name;
 	
 	@Column(unique = true)

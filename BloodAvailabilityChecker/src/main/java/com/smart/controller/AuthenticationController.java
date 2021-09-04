@@ -65,16 +65,16 @@ public class AuthenticationController {
 				session.setAttribute("email", email);
 
 				//session.setAttribute("message", "We have sent OTP to your email..");
-				session.setAttribute("message",new Message("We have sent OTP to your email..","success"));
+				session.setAttribute("message",new Message("We have sent OTP to your email....!","success"));
 				return "verify_otp";
 			}else {
 				//session.setAttribute("message", "Check your email id !!");
-				session.setAttribute("message",new Message("Check your email id !!","danger"));
+				session.setAttribute("message",new Message("Check your email id....!","danger"));
 				return "forgot_email_form";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("message",new Message("Check your email id !!","danger"));
+			session.setAttribute("message",new Message("Check your email id....!","danger"));
 			return "forgot_email_form";
 		}
 	}

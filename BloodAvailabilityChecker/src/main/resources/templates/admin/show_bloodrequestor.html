@@ -9,7 +9,7 @@
 	<section>
 		<div class="card mr-3 ml-3">
 			<div class="card-body">
-				<h1 class="text-center">Blood Requestor List</h1>
+				<h1 class="text-center mt-3  text-danger">Blood Requestor List</h1>
 				
 				<!-- <div class="search-container my-4">
 					
@@ -26,7 +26,7 @@
 					<table class="table table-hover">
 					  <thead class="thead-light">
 					    <tr>
-					      <!-- <th scope="col">#ID</th> -->
+					      <th scope="col">#SR.NO.</th> 
 					      <th scope="col">Name</th>
 					      <th scope="col">Email</th>
 					      <th scope="col">Phone</th>
@@ -38,9 +38,8 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr th:each="u : ${users}">
-					      <!-- <th scope="row" th:text="${u.id}"></th> -->
-					      
+					    <tr th:each="u,status : ${users}">
+					      <td th:text="${status.index}+1"></td>
 					      <td th:text="${u.name}"></td>
 					      <td th:text="${u.email}"></td>
 					      <td th:text="${u.phone}"></td>
@@ -55,7 +54,7 @@
 					      	</form>
 					      	
 					      <form method="post" th:action="@{'/admin/update-status-bloodrequestor-block/'+${u.id}}" class="mb-1">
-					      		<button type="submit" class="btn btn btn-warning btn-sm px-3">Block</button>
+					      		<button type="submit" class="btn btn btn-warning btn-sm ">Block</button>
 					      	</form>
 					      	
 					      	<!--  <a th:href="@{'/admin/delete-bloodrequestor/'+${u.id}}" class="btn btn-danger btn-sm">Delete</a> -->

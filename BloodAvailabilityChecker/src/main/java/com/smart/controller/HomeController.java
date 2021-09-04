@@ -27,86 +27,76 @@ public class HomeController {
 	@Autowired
 	private UserRepository userRepository;
 
-	/*@RequestMapping("/test")
-	@ResponseBody
-	public String test() {
-
-		User user = new User();
-		user.setName("Rohit Sharma");
-		user.setEmail("rohit@gmail.com");
-
-		userRepository.save(user);
-		return "Working..";
-	}*/
-
 	@RequestMapping("/")
 	public String index(Model m) {
-		m.addAttribute("title","Home-Blood Availability Checker");
+		m.addAttribute("title", "Home-Blood Availability Checker");
 		return "home";
 	}
 
 	@RequestMapping("/home")
 	public String home(Model m) {
-		m.addAttribute("title","Home-Blood Availability Checker");
+		m.addAttribute("title", "Home-Blood Availability Checker");
 		return "home";
 	}
 
 	@RequestMapping("/about")
 	public String about(Model m) {
-		m.addAttribute("title","About-Blood Availability Checker");
+		m.addAttribute("title", "About-Blood Availability Checker");
 		return "about";
 	}
 
 	@RequestMapping("/signup")
 	public String signup(Model m) {
 
-		m.addAttribute("title","Register-Blood Availability Checker");
+		m.addAttribute("title", "Register-Blood Availability Checker");
 		m.addAttribute("user", new User());
 		return "signup";
 	}
 
-	//handler for registering the user
-	@RequestMapping(value = "/do_register",method = RequestMethod.POST)
-	public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult bindingResult,
-			@RequestParam(value = "agreement",defaultValue = "false")boolean agreement,
-			HttpSession httpSession,Model model) {
+	// handler for registering the user
+
+	@RequestMapping(value = "/do_register", method = RequestMethod.POST)
+	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
+			@RequestParam(value = "agreement", defaultValue = "false") boolean agreement, HttpSession httpSession,
+			Model model) {
 
 		try {
 
-			if(bindingResult.hasErrors()) {
-				System.out.println("ERROR"+bindingResult.toString());
-				model.addAttribute("user",user);
+			if (bindingResult.hasErrors()) {
+				System.out.println("ERROR" + bindingResult.toString());
+				model.addAttribute("user", user);
 				return "signup";
 			}
 
-			//user.setRole("ROLE_USER");
+			// user.setRole("ROLE_USER");
 			user.setStatus("Active");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-			if(user.getRole().equalsIgnoreCase("ROLE_BLOODBANK")) {
+			if (user.getRole().equalsIgnoreCase("ROLE_BLOODBANK")) {
 				user.setStatus("Pending");
 			}
 
-			System.out.println("User :: "+user);
+			System.out.println("User :: " + user);
 
-			User result=this.userRepository.save(user);
+			this.userRepository.save(user);
+			// User result=this.userRepository.save(user);
 
-			httpSession.setAttribute("message", new Message("Successfully registered !!","alert-success"));
-			model.addAttribute("user",new User());
+			httpSession.setAttribute("message", new Message("Successfully registered !!", "alert-success"));
+			model.addAttribute("user", new User());
 			return "signup";
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("user",user);
-			httpSession.setAttribute("message", new Message("Email id already exist..","alert-danger"));
+			model.addAttribute("user", user);
+			httpSession.setAttribute("message", new Message("Email id already exist..", "alert-danger"));
 			return "signup";
 		}
 	}
 
-	//handler for customer login
+	// handler for customer login
 	@GetMapping("/signin")
 	public String customLogin(Model model) {
-		model.addAttribute("title","Login Page");
+		model.addAttribute("title", "Login Page");
 		return "login";
 
 	}

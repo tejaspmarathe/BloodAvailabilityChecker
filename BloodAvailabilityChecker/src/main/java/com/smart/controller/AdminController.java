@@ -117,7 +117,7 @@ public class AdminController {
 		user.setStatus("Blocked");
 		this.userRepository.save(user);
 		System.out.println("User status updated" + user.getStatus());
-		session.setAttribute("message", new Message(user.getName() + " Updated successfully..!", "success"));
+		session.setAttribute("message", new Message(user.getName() + " Blocked successfully..!", "danger"));
 		return "redirect:/admin/show_bloodbank/0";
 	}
 
@@ -138,7 +138,7 @@ public class AdminController {
 		this.userRepository.deleteById(uid);
 
 		System.out.println("Deleted..");
-		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "success"));
+		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "danger"));
 		return "redirect:/admin/show_bloodbank/0";
 	}
 
@@ -166,7 +166,7 @@ public class AdminController {
 		user.setStatus("Blocked");
 		this.userRepository.save(user);
 		System.out.println("User status updated" + user.getStatus());
-		session.setAttribute("message", new Message(user.getName() + " Blocked successfully..!", "success"));
+		session.setAttribute("message", new Message(user.getName() + " Blocked successfully..!", "danger"));
 		return "redirect:/admin/show_bloodrequestor/0";
 	}
 
@@ -179,7 +179,7 @@ public class AdminController {
 		this.userRepository.deleteById(uid);
 
 		System.out.println("Deleted..");
-		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "success"));
+		session.setAttribute("message", new Message(user1.getName() + " deleted successfully..!", "danger"));
 		return "redirect:/admin/show_bloodrequestor/0";
 	}
 

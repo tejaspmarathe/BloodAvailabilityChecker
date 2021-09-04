@@ -10,7 +10,7 @@
 		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-6 offset-md-3"> <!-- To change form width on UI, u can chage col-md-8, and offset-md-2 -->
-					<div class="my-card mt-3">
+					<div class="my-card my-4">
 					
 						<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
 						  <p class="text-center" th:text="${session.message.content}"></p>
@@ -21,66 +21,66 @@
 						<div class="container text-center">
 							<img class="" style="width: 80px" th:src="@{/img/add-user.png}">
 						</div>
-						<h2 class="text-center">..Register Here..</h2>
+						<h2 class="text-center text-danger">..Register Here..</h2>
 						<form novalidate="novalidate" th:action="@{/do_register}" method="post" th:object="${user}">
 
 							<div class="form-group">
 
 								<!-- name -->
-								<label for="name_field">Enter Your Name</label>
+								<label for="name_field" class="text-danger">Enter Your Name</label>
 								<input type="text" name="name" class="form-control" id="name_field"
-										aria-describedby="emailHelp" placeholder="Enter Your Name" required th:value="${user.name}" 
+										aria-describedby="emailHelp"  required th:value="${user.name}" 
 										th:classappend="${#fields.hasErrors('name')?'is-invalid':''}">
 								<div th:each="e : ${#fields.errors('name')}" th:text="${e}" class="invalid-feedback"></div>		
 								
 								<!-- email -->
-								<label for="email_field">Enter Your Email</label>
+								<label for="email_field" class="text-danger">Enter Your Email</label>
 								<input type="text" class="form-control" id="email_field" name="email" aria-describedby="emailHelp"
 										th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
-										placeholder="Enter Your Email" required th:value="${user.email}">
+										 required th:value="${user.email}">
 								 <div th:each="e : ${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"></div>		
 								
 								<!-- password -->
-								<label for="password_field">Enter Your Password</label>
+								<label for="password_field" class="text-danger">Enter Your Password</label>
 								<input type="password" class="form-control" id="password_field" name="password" aria-describedby="emailHelp"
 										th:classappend="${#fields.hasErrors('password')?'is-invalid':''}" 
-										placeholder="Enter Your Password" required>
+										 required>
 								<div th:each="e : ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"></div>
 								
 								<!-- phone -->
-								<label for="phone_field">Enter Your Mobile Number</label>
+								<label for="phone_field" class="text-danger">Enter Your Mobile Number</label>
 								<input type="text" name="phone" class="form-control" id="phone_field"
-										aria-describedby="emailHelp" placeholder="Enter Your Mobile Number" required th:value="${user.phone}" 
+										aria-describedby="emailHelp"  required th:value="${user.phone}" 
 										th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}">
 								<div th:each="e : ${#fields.errors('phone')}" th:text="${e}" class="invalid-feedback"></div>
 								
 								<!-- address -->
-								<label for="address_field">Enter Your Address</label>
+								<label for="address_field" class="text-danger">Enter Your Address</label>
 								<input type="text" name="address" class="form-control" id="address_field"
-										aria-describedby="emailHelp" placeholder="Enter here" required th:value="${user.address}" 
+										aria-describedby="emailHelp"  required th:value="${user.address}" 
 										th:classappend="${#fields.hasErrors('address')?'is-invalid':''}">
 								<div th:each="e : ${#fields.errors('address')}" th:text="${e}" class="invalid-feedback"></div>		
 								
 								<!-- location -->
-								<label for="location_field">Enter Your City</label>
+								<label for="location_field" class="text-danger">Enter Your City</label>
 								<input type="text" name="location" class="form-control" id="location_field"
-										aria-describedby="emailHelp" placeholder="Enter Your City" required th:value="${user.location}" 
+										aria-describedby="emailHelp"  required th:value="${user.location}" 
 										th:classappend="${#fields.hasErrors('location')?'is-invalid':''}">
 								<div th:each="e : ${#fields.errors('location')}" th:text="${e}" class="invalid-feedback"></div>
 
 								<!-- role -->
-								<label for="role_field">Enter Your Role</label> 
+								<label for="role_field" class="text-danger">Enter Your Role</label> 
 								<select	th:field="*{role}" class="form-control" aria-describedby="emailHelp" >
 									<option th:value="'ROLE_USER'" th:text="User"></option>
 									<option th:value="'ROLE_BLOODBANK'" th:text="Bloodbank"></option>
 								</select>
 
 							</div>
+							
 
 							<div class="container text-center">
 								<button class="btn bg-success text-white" type="submit">Submit</button>
-								<!-- <button class="btn bg-primary btn-block text-white" type="submit">Submit</button> -->
-								<button class="btn bg-danger " type="reset">Reset</button>
+								<button class="btn bg-danger text-white" type="reset">Reset</button>
 							</div>
 
 						</form>

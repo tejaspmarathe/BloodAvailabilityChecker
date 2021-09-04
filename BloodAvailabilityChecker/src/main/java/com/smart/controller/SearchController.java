@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smart.dao.BLoodStockRepository;
 import com.smart.dao.UserRepository;
 import com.smart.entities.User;
 
@@ -37,7 +36,7 @@ public class SearchController {
 		return ResponseEntity.ok(filteredList);
 	}
 
-
+//	for distinct location
 	private List<User> filterUniqueRecords(List<User> list) {
 
 		ArrayList<User> users = null;

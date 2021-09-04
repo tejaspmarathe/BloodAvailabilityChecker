@@ -156,7 +156,7 @@ public class BloodbankController {
 		if(bloodStockDetails!=null && user.getId()==bloodStockDetails.getUser().getId()) {
 			this.bLoodStockRepository.deleteById(bloodstockid);
 			System.out.println("Deleted..");
-			session.setAttribute("message", new Message("BloodStock deleted successfully..!","success"));
+			session.setAttribute("message", new Message("BloodStock deleted successfully..!","danger"));
 		}
 		return "redirect:/user/show_bloodstock/0";
 	}

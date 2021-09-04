@@ -9,24 +9,14 @@
 	<section>
 		<div class="card mr-3 ml-3">
 			<div class="card-body">
-				<h1 class="text-center">BLoodBanks List</h1>
+				<h1 class="text-center mt-3   text-danger">BloodBanks List</h1>
 				
-				<!-- <div class="search-container my-4">
-					
-					<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contacts.." /> 
-				
-					<div class="search-result">
-						
-						result goes here
-						<h2>This is result..</h2>
-						
-					</div> -->
 				</div>
 				<div class="table-responsive">
 					<table class="table table-hover">
 					  <thead class="thead-light">
 					    <tr>
-					      <!-- <th scope="col">#ID</th> -->
+					      <th scope="col">#SR.NO.</th>
 					      <th scope="col">Name</th>
 					      <th scope="col">Email</th>
 					      <th scope="col">Phone</th>
@@ -38,9 +28,9 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr th:each="u : ${bloodbank}">
-					      <!-- <th scope="row" th:text="${u.id}"></th> -->
-					      
+					    <tr th:each="u,status : ${bloodbank}">
+			
+					      <td th:text="${status.index}+1"></td>
 					      <td th:text="${u.name}"></td>
 					      <td th:text="${u.email}"></td>
 					      <td th:text="${u.phone}"></td>
@@ -51,11 +41,11 @@
 
 					      <td>
 					      <form method="post" th:action="@{'/admin/update-status-approve/'+${u.id}}" class="mb-1">
-					      		<button type="submit" class="btn btn-success btn-sm">Approve</button>
+					      		<button type="submit" class="btn btn-success btn-sm">Active</button>
 					      	</form>
 					      	
 					      <form method="post" th:action="@{'/admin/update-status-block/'+${u.id}}" class="mb-1">
-					      		<button type="submit" class="btn btn btn-warning btn-sm px-3">Block</button>
+					      		<button type="submit" class="btn btn btn-warning btn-sm px-2">Block </button>
 					      	</form>
 					      	
 					      	<!--  <a th:href="@{'/admin/delete-bloodbank/'+${u.id}}" class="btn btn-danger btn-sm">Delete</a> -->

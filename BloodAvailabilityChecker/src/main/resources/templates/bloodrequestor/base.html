@@ -28,6 +28,7 @@
 <body>
 	<!-- Start navbar -->
 	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-danger navcustomcolor">
+	<img th:src="@{/img/symbol1.PNG}"  width="50px"  class="rounded-circle mr-2">
 		
 		<a class="navbar-brand" href="#">Blood Availability Checker</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -40,11 +41,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto text-uppercase">
 			
-				<li class="nav-item"><a class="nav-link" th:href="@{/}">Home
+				<li class="nav-item"><a class="nav-link" th:href="@{/bloodrequestor/index}">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
 			
-				<!-- <li class="nav-item"><a class="nav-link" href="#">About</a></li> -->
 				
 				<li class="nav-item"><a class="nav-link" th:text="${user.name}" th:href="@{/bloodrequestor/profile}" href="#">Login</a>
 				</li>
@@ -52,11 +52,7 @@
 				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a>
 				</li>
 			</ul>
-			<!-- <form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form> -->
+			
 		</div>
 	</nav>
 	<!-- End navbar -->
@@ -67,7 +63,7 @@
 		<!-- https://cdnjs.com/libraries/font-awesome   : use this link for CSS
 		https://fontawesome.com/start                   : use this link for icons-->
 		
-		<span onclick="toggleSidebar()" class="crossbtn">&times;</span>
+		<span onclick="toggleSidebar()" class="crossbtn text-danger">&times;</span>
 		
 		<a id="home-link" href="#" th:href="@{/bloodrequestor/index}" class="item active"><i class="fas fa-home"></i> Home</a>
 		<a id="search-link" href="#" th:href="@{/bloodrequestor/check_blood_availability/0}" class="item"><i class="fas fa-search"></i>Check Blood Availability</a>
@@ -83,7 +79,7 @@
 	<!-- Content Area -->
 	<div class="content mt-5">
 	
-		<i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+		<i onclick="toggleSidebar()" class="fas fa-bars m-4 text-danger"></i>
 		
 		<!-- message box -->
 		<div th:if="${session.message}" class="container">
