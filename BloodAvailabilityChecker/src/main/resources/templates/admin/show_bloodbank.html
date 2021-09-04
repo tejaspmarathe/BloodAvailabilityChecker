@@ -58,7 +58,8 @@
 					      		<button type="submit" class="btn btn btn-warning btn-sm px-3">Block</button>
 					      	</form>
 					      	
-					      	 <a th:href="@{'/admin/delete-bloodbank/'+${u.id}}" class="btn btn-danger btn-sm">Delete</a>
+					      	<!--  <a th:href="@{'/admin/delete-bloodbank/'+${u.id}}" class="btn btn-danger btn-sm">Delete</a> -->
+					      	<a href="#" th:onclick="|deletebloodstock(${u.id})|" class="btn btn-danger btn-sm">Delete</a>
 					      </td>
 					    </tr>
 					  </tbody>

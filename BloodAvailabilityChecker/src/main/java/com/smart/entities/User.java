@@ -32,7 +32,7 @@ public class User {
 	private String name;
 	
 	@Column(unique = true)
-	@Email(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$")
+	@Email(regexp ="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.com+$",message = "Please enter correct email id")
 	private String email;
 	
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "Invalid password format. ex.Abcd@123")

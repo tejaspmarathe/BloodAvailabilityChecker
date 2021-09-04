@@ -1,5 +1,7 @@
 package com.smart.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -100,7 +102,7 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("user",user);
-			httpSession.setAttribute("message", new Message("Something went wrong !!"+e.getMessage(),"alert-danger"));
+			httpSession.setAttribute("message", new Message("Email id already exist..","alert-danger"));
 			return "signup";
 		}
 	}
