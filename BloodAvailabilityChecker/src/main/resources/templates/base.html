@@ -20,7 +20,6 @@
 <body>
 	<!-- Start navbar -->
 	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-danger navcustomcolor">
-	<!-- <img class="" style="width: 80px" th:src="@{/img/add-user.png}"> -->
 	<img th:src="@{/img/symbol1.PNG}"  width="50px"  class="rounded-circle mr-2">
 		
 		<a class="navbar-brand" href="#">Blood Availability Checker</a>
@@ -34,27 +33,13 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto text-uppercase">
 			
-				<li class="nav-item"><a class="nav-link link-light" th:href="@{/}">Home
-						<!-- <span class="sr-only">(current)</span> -->
-				</a></li>
-			
-				<li class="nav-item"><a class="nav-link" th:href="@{/signup/}">Signup</a>
-				</li>
-				
-				<li class="nav-item"><a class="nav-link" th:href="@{/signin/}" href="#">Login</a>
-				</li>
-				
+				<li class="nav-item"><a class="nav-link link-light" th:href="@{/}">Home</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/signup/}">Signup</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/signin/}" href="#">Login</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">About</a></li>
-				
-				
-				
-				
+			
 			</ul>
-			<!-- <form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form> -->
+			
 		</div>
 	</nav>
 	<!-- End navbar -->

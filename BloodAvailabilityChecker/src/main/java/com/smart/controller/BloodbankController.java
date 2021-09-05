@@ -61,7 +61,7 @@ public class BloodbankController {
 		return "bloodbank/user_dashboard";
 	}
 
-	//open add form handler
+	//open add bloodstock form handler
 	@GetMapping("/add-bloodstock")
 	public String openAddBloodStockForm(Model model, Principal principal,HttpSession session) {
 		BloodStock checkBloodStock=null;
@@ -81,9 +81,9 @@ public class BloodbankController {
 
 	}
 
-	//processing add contact
+	//processing add bloodstock
 	@PostMapping("/process-bloodstock")
-	public String processContact(@ModelAttribute BloodStock bloodStock,Model model, Principal principal,HttpSession session) {
+	public String processBloodStock(@ModelAttribute BloodStock bloodStock,Model model, Principal principal,HttpSession session) {
 
 		try {
 			String name=principal.getName();
@@ -108,11 +108,11 @@ public class BloodbankController {
 		}
 	}
 
-	//View Contacts handler
-	//per page =5[n]
+	//View BloodStock handler
+	//per page =3[n]
 	//current page = 0[page]
 	@GetMapping("/show_bloodstock/{page}")
-	public String viewContactsPage(@PathVariable ("page") Integer page, Model model, Principal principal) {
+	public String viewBloodStockPage(@PathVariable ("page") Integer page, Model model, Principal principal) {
 		model.addAttribute("title","View Blood Stock");
 
 		String name=principal.getName();
@@ -127,7 +127,7 @@ public class BloodbankController {
 		return "bloodbank/show_bloodStock";
 	}
 
-	//Showing particular contact details
+	//Showing particular BloodStock details
 	@RequestMapping("/{bloodstockid}/bloodstock")
 	public String showBloodStockDetail(@PathVariable ("bloodstockid") Integer bloodstockid, Model model, Principal principal) {
 
@@ -145,7 +145,7 @@ public class BloodbankController {
 	}
 
 	@GetMapping("/delete/{bloodstockid}")
-	public String deleteContact(@PathVariable ("bloodstockid") Integer bloodstockid, Model model, Principal principal, HttpSession session) {
+	public String deleteBloodStock(@PathVariable ("bloodstockid") Integer bloodstockid, Model model, Principal principal, HttpSession session) {
 
 		String name=principal.getName();
 		User user=userRepository.getUserByUserName(name);
@@ -174,7 +174,7 @@ public class BloodbankController {
 
 	}
 
-	//update contact handler
+	//update BloodStock handler
 	@PostMapping(value="/process-update")
 	public String updateHandler(@ModelAttribute BloodStock bloodStockDetails, Principal principal,Model model,HttpSession session) {
 

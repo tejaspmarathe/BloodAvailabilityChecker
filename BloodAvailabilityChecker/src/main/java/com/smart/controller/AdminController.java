@@ -67,7 +67,6 @@ public class AdminController {
 	public String viewBloodBankPage(@PathVariable("page") Integer page, Model model, Principal principal) {
 		model.addAttribute("title", "View Users");
 		Pageable pageable = PageRequest.of(page, 3);
-		;
 
 		String role = "ROLE_BLOODBANK";
 		Page<User> bloodbank = this.userRepository.findUserByRole(role, pageable);
@@ -128,8 +127,8 @@ public class AdminController {
 
 		User user1 = this.userRepository.findById(uid).get();
 
-		//		String name=principal.getName();
-		//		User user=userRepository.getUserByUserName(name);
+		// String name=principal.getName();
+		// User user=userRepository.getUserByUserName(name);
 		BloodStock bloodStockDetails = this.bLoodStockRepository.findBloodStockByUser(uid);
 		if (bloodStockDetails != null) {
 			this.bLoodStockRepository.deleteById(bloodStockDetails.getBloodstockid());
@@ -209,13 +208,13 @@ public class AdminController {
 		String currentPassword = user.getPassword();
 		System.out.println("currentPassword :: " + currentPassword);
 
-		if (this.passwordEncoder.matches(oldPassword, currentPassword) ) {
-			if(newPassword!=null && newPassword!="") {
+		if (this.passwordEncoder.matches(oldPassword, currentPassword)) {
+			if (newPassword != null && newPassword != "") {
 				// change password
 				user.setPassword(this.passwordEncoder.encode(newPassword));
 				this.userRepository.save(user);
 				session.setAttribute("message", new Message("Your password is successfully changed..", "success"));
-			}else {
+			} else {
 				session.setAttribute("message", new Message("New password field should not be blank!!", "danger"));
 				return "redirect:/admin/settings";
 			}

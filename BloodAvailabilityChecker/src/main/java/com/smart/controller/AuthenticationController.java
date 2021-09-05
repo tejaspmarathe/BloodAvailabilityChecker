@@ -42,7 +42,7 @@ public class AuthenticationController {
 
 		try {
 			System.out.println("Email :: "+email);
-			//1. generate OTP of 4 digit 
+			//1. generate OTP  
 			int otp = random.nextInt(999999);
 			System.out.println("OTP ::"+otp);
 
@@ -50,7 +50,7 @@ public class AuthenticationController {
 			String subject="OTP from Blood Availability Checker Application";
 			String message="<div style='border:1px solid #e2e2e2; padding:20px'>"
 					+"<h3>"
-					+"Please use below OTP for Blood Availability Checker Application verification. OTP is "
+					+"Please use below OTP for changing password of Blood Availability Checker Application . OTP is "
 					+"<br>"
 					+"<b>"
 					+otp
@@ -91,7 +91,7 @@ public class AuthenticationController {
 
 			if(user==null) {
 				//send error message
-				session.setAttribute("message", "User doesnot exist with this email !!");
+				session.setAttribute("message", "User doesnot exist with this email....!");
 				return "forgot_email_form";
 			}else {
 				//send change password form	
